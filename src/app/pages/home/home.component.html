@@ -1,0 +1,78 @@
+<div class="row text-center">
+  <div class="col-12">
+    <h1>{{ constants.titles.home }}</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <div class="input-group">
+      <select
+        id="categorySelect"
+        class="form-select"
+        wgt-dropdwn
+        [defaultOption]="constants.placeholders.selectCategory"
+        [(ngModel)]="filter.category"
+        [empyElem]="true"
+      >
+        <option *ngFor="let category of categoryList" [value]="category.id">
+          <span>{{ category.name }}</span>
+        </option>
+      </select>
+      <select
+        id="difficultySelect"
+        class="form-select"
+        wgt-dropdwn
+        [defaultOption]="constants.placeholders.selectDifficulty"
+        [(ngModel)]="filter.difficulty"
+        [empyElem]="true"
+      >
+        <option
+          *ngFor="let difficulty of difficulties"
+          [value]="difficulty.value"
+        >
+          <span>{{ difficulty.description }}</span>
+        </option>
+      </select>
+      <button
+        id="createBtn"
+        type="button"
+        class="btn btn-outline-secondary"
+        (click)="createQuiz()"
+        [disabled]="!filter.category || !filter.difficulty"
+      >
+        {{ constants.buttons.create }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="questionList && questionList.length">
+  <div *ngFor="let question of questionList">
+    <div class="row mb-3 mt-3">
+      <div class="col-12 bold" [innerHTML]="question.question"></div>
+    </div>
+    <div class="row">
+      <div class="col-2" *ngFor="let answer of question.all_answers">
+        <button
+          [id]="answer.id"
+          type="button"
+          [ngClass]="answer.checked ? 'btn btn-success': 'btn btn-outline-success'"
+          [innerHTML] = "answer.description"
+          (click)="toggleAnswer(question, answer.id)"
+        >
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="showSubmit" class="row text-center mt-5">
+  <div class="col-12">
+    <button
+      id="submitBtn"
+      type="button"
+      ngClass="btn btn-primary"
+    >
+    {{constants.buttons.submit}}
+    </button>
+  </div>
+</div>
