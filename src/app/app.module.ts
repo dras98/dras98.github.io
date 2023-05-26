@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoaderComponent } from './common/loader/loader.component';
 import { HomeComponent } from './pages/home/home.component';
-import { DropdwnComponent } from './common/dropdwn/dropdwn.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -16,9 +15,7 @@ import { ResultComponent } from './pages/result/result.component';
   declarations: [
     AppComponent,
     LoaderComponent,
-    DropdwnComponent,
     HomeComponent,
-    DropdwnComponent,
     ErrorPageComponent,
     ResultComponent,
   ],

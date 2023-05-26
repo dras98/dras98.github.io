@@ -1,8 +1,6 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/common/base/base.component';
 import { Answer } from 'src/app/model/dto/answer/answer.model';
-import { CategoryList } from 'src/app/model/dto/category/category-list.model';
 import { Category } from 'src/app/model/dto/category/category.model';
 import { Question } from 'src/app/model/dto/question/question.model';
 import { SessionData } from 'src/app/model/dto/sessionData/session-data.model';
