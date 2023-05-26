@@ -6,10 +6,11 @@ import { AppComponent } from './app.component';
 import { LoaderComponent } from './common/loader/loader.component';
 import { HomeComponent } from './pages/home/home.component';
 import { DropdwnComponent } from './common/dropdwn/dropdwn.component';
-import { ErrorPageComponent } from './common/error-page/error-page.component';
+import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorService } from './services/interceptor/interceptor.service';
+import { ResultComponent } from './pages/result/result.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { InterceptorService } from './services/interceptor/interceptor.service';
     HomeComponent,
     DropdwnComponent,
     ErrorPageComponent,
+    ResultComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [

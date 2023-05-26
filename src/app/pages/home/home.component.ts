@@ -5,9 +5,11 @@ import { Answer } from 'src/app/model/dto/answer/answer.model';
 import { CategoryList } from 'src/app/model/dto/category/category-list.model';
 import { Category } from 'src/app/model/dto/category/category.model';
 import { Question } from 'src/app/model/dto/question/question.model';
+import { SessionData } from 'src/app/model/dto/sessionData/session-data.model';
 import { QuestionsFilter } from 'src/app/model/filters/questions-filter.model';
 import { CategoryService } from 'src/app/services/category/category.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { NavigationService } from 'src/app/services/navigation/navigation.service';
 import { QuestionService } from 'src/app/services/questions/question.service';
 
 @Component({
@@ -26,7 +28,8 @@ export class HomeComponent extends BaseComponent implements OnInit {
   constructor(
     private catService: CategoryService,
     private questionService: QuestionService,
-    private loadService: LoaderService
+    private loadService: LoaderService,
+    private navService: NavigationService
   ) {
     super();
   }
@@ -37,9 +40,19 @@ export class HomeComponent extends BaseComponent implements OnInit {
   }
 
   loadCategories(): void {
+
+    this.categoryList = new Array<Category>();
+
+    let defaultCategory: Category = new Category();
+
+    defaultCategory.id = this.constants.defValues.defaultCategory;;
+    defaultCategory.name = this.constants.placeholders.selectCategory;
+
+    this.categoryList.push(defaultCategory);
+
     let catSubscr = this.catService.getCategories().subscribe((result) => {
       if (result) {
-        this.categoryList = result.trivia_categories;
+        this.categoryList = this.categoryList.concat(result.trivia_categories);
       }
       this.loadService.stopLoad();
       catSubscr.unsubscribe();
@@ -48,8 +61,6 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
   initializeFilter(): void {
     this.filter = new QuestionsFilter();
-    this.filter.amount = 5;
-    this.filter.type = 'multiple';
   }
 
   createQuiz(): void {
@@ -102,10 +113,30 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
   checkSubmission(): void {
 
-    let unasweredQuestions: Array<Question> = this.questionList.filter((question: Question) =>
-      question.all_answers?.filter((answer: Answer) => answer.checked).length === 0
-    );
+    let unasweredQuestions: Array<Question> = this.getUnasweredQuestions(this.questionList);
 
     this.showSubmit = unasweredQuestions.length === 0;
+  }
+
+  getUnasweredQuestions(questionList: Array<Question>): Array<Question> {
+
+    return questionList.filter((question: Question) => {
+      let checkedAnswers: Array<Answer> | undefined = this.getCheckedAnswers(question.all_answers);
+
+      return checkedAnswers?.length === 0;
+    });
+
+  }
+
+  getCheckedAnswers(answers?: Array<Answer>): Array<Answer> | undefined {
+    return answers?.filter((answer: Answer) => answer.checked);
+  }
+
+  submitAnswers(): void {
+
+    let questionString: string = JSON.stringify(this.questionList);
+
+    this.navService.navigate([this.endpoints.local.results], new SessionData(this.constants.dataKeys.question, questionString))
+
   }
 }

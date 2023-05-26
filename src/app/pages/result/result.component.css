@@ -1,0 +1,22 @@
+.great-score {
+  background-color: green;
+  color: white;
+}
+
+.avarage-score {
+  background-color: yellow;
+  color: black;
+}
+
+.bad-score {
+  background-color: red;
+  color: white;
+}
+
+.text-red {
+  color: red;
+}
+
+.answer-button {
+  opacity: 1 !important;
+}

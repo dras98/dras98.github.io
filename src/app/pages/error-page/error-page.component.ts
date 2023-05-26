@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationService } from 'src/app/services/navigation/navigation.service';
-import { BaseComponent } from '../base/base.component';
+import { BaseComponent } from '../../common/base/base.component';
 
 @Component({
   selector: 'app-error-page',

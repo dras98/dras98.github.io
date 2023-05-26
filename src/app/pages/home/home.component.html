@@ -9,10 +9,7 @@
       <select
         id="categorySelect"
         class="form-select"
-        wgt-dropdwn
-        [defaultOption]="constants.placeholders.selectCategory"
         [(ngModel)]="filter.category"
-        [empyElem]="true"
       >
         <option *ngFor="let category of categoryList" [value]="category.id">
           <span>{{ category.name }}</span>
@@ -21,10 +18,7 @@
       <select
         id="difficultySelect"
         class="form-select"
-        wgt-dropdwn
-        [defaultOption]="constants.placeholders.selectDifficulty"
         [(ngModel)]="filter.difficulty"
-        [empyElem]="true"
       >
         <option
           *ngFor="let difficulty of difficulties"
@@ -38,7 +32,7 @@
         type="button"
         class="btn btn-outline-secondary"
         (click)="createQuiz()"
-        [disabled]="!filter.category || !filter.difficulty"
+        [disabled]="+filter.category < 0 || !filter.difficulty"
       >
         {{ constants.buttons.create }}
       </button>
@@ -70,7 +64,8 @@
     <button
       id="submitBtn"
       type="button"
-      ngClass="btn btn-primary"
+      class="btn btn-primary"
+      (click)="submitAnswers()"
     >
     {{constants.buttons.submit}}
     </button>

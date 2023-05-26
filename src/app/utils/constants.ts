@@ -17,11 +17,22 @@ export const constants = {
     home: "Home"
   },
   labels: {
-    score: "You scored {1} out of {5}"
+    score: "You scored {1} out of {2}",
+    noQuiz: "You need to answer the questions first!"
+  },
+  defValues: {
+    defaultCategory: -99999
+  },
+  dataKeys: {
+    question: "questions"
   }
 };
 
 export const difficulties: Array<Difficulty> = [
+  {
+    value: "",
+    description: constants.placeholders.selectDifficulty
+  },
   {
     value: "easy",
     description: "Easy"

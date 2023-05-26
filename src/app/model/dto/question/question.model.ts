@@ -7,5 +7,5 @@ export class Question {
   question!: string;
   correct_answer!: string;
   incorrect_answers!: Array<string>;
-  all_answers?: Array<Answer>
+  all_answers?: Array<Answer>;
 }

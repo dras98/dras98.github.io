@@ -1,0 +1,51 @@
+<div class="row text-center">
+  <div class="col-12">
+    <h1>{{ constants.titles.result }}</h1>
+  </div>
+</div>
+
+<div *ngIf="questionList && questionList.length">
+  <div *ngFor="let question of questionList">
+    <div class="row mb-3 mt-3">
+      <div class="col-12 bold" [innerHTML]="question.question"></div>
+    </div>
+    <div class="row">
+      <div class="col-2" *ngFor="let answer of question.all_answers">
+        <button
+          [id]="answer.id"
+          type="button"
+          [ngClass]="getAnswerClass(answer)"
+          [innerHTML] = "answer.description"
+          [disabled]="true"
+        >
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!questionList || !questionList.length">
+  <div class="row text-center">
+    <div class="col-12 text-red">
+      <h2>{{ constants.labels.noQuiz }}</h2>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showScore" class="row text-center mt-5">
+  <div [ngClass]="'col-8 ' + getScoreClass()">
+    {{getScoreMessage()}}
+  </div>
+</div>
+<div class="row text-center mt-5">
+  <div class="col-12">
+    <button
+      id="submitBtn"
+      type="button"
+      class="btn btn-primary"
+      (click)="createNewQuiz()"
+    >
+    {{constants.buttons.createNewQuiz}}
+    </button>
+  </div>
+</div>
