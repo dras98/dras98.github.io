@@ -10,10 +10,10 @@ import { catchError } from 'rxjs/operators';
 })
 export class InterceptorService implements HttpInterceptor {
   constructor(private loaderService: LoaderService, public router: Router) { }
-  intercept(
-    request: HttpRequest<any>,
+  intercept<T>(
+    request: HttpRequest<T>,
     next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  ): Observable<HttpEvent<T>> {
     this.loaderService.startLoad();
     return next.handle(request).pipe(
       catchError((err) => {
