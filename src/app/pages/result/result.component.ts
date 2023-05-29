@@ -65,7 +65,7 @@ export class ResultComponent extends BaseComponent implements OnInit {
 
     let answerClass: string = "btn btn-outline-success";
 
-    if(answer.checked && answer.correct) {
+    if(answer.correct) {
 
       answerClass = "btn btn-success";
 
